@@ -1,0 +1,28 @@
+openapi: 3.1.0
+info:
+  title: Vector Search API
+  version: 0.1.0
+paths:
+  /collections:
+    post:
+      summary: Create a collection
+      responses:
+        "201":
+          description: Collection created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collection"
+components:
+  schemas:
+    Collection:
+      type: object
+      required: [name, dimension]
+      properties:
+        name:
+          type: string
+          example: product-catalog
+        dimension:
+          type: integer
+          minimum: 1
+          example: 3
