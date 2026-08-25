@@ -24,6 +24,13 @@ Accepted
 | Sphinx | 4 | 5 | 5 | 4 | 2 | 2 | 82 |
 | GitBook | 4 | 4 | 2 | 3 | 4 | 5 | 73 |
 
+## Score rationale
+
+- Docusaurus: strong narrative, local-build, and React/MDX extension fit; external REST and SDK integrations add sprint work, so Scope is 3 rather than 5.
+- MkDocs + Material: a fast Markdown-first, Python-aligned setup earns Scope 5, while plugin or external API tooling lowers its reference and extension scores.
+- Sphinx: bundled Python reference extensions and local builds score highly, but the environment, MyST, and multi-output setup produce the highest scope cost.
+- GitBook: managed editing and API presentation reduce setup effort, but hosted-product ownership lowers local/CI and extension flexibility.
+
 ## Decision
 
 Select Docusaurus 3 for this sprint. It ties with MkDocs + Material on the weighted score, so the deciding factor is the portfolio goal: demonstrate a JavaScript/React-flavoured, self-owned developer-docs workflow. Sphinx remains stronger for native Python autodoc, but this project has REST as its primary reference surface and the Python SDK is deliberately small with a separate documented extraction path.
@@ -36,4 +43,4 @@ Select Docusaurus 3 for this sprint. It ties with MkDocs + Material on the weigh
 
 ## Consequences
 
-OpenAPI validation and reference generation remain independently runnable from the website build. The site must build with `npm run build` locally and later in CI.
+These are future architecture constraints and acceptance requirements, not claims about the repository's current implementation. OpenAPI validation and reference generation must each be runnable independently of the website build; they do not have to be independent of each other. The site must build with `npm run build` locally and later in CI.
