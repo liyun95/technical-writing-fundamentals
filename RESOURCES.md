@@ -14,6 +14,8 @@
   Use for: evaluating Python API-reference generation, cross-references, and multi-format publishing.
 - [Sphinx autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html)
   Use for: tracing Python signatures and docstrings through import-based reference extraction, including its CI environment and import-side-effect risks.
+- [PyMilvus repository](https://github.com/milvus-io/pymilvus)
+  Use for: the second-stage public-source audit of one or two real Python SDK methods after the synthetic pipeline works; verify signatures, implementation, tests, tags, and existing docstrings before authoring.
 - [Javadoc Guide](https://docs.oracle.com/en/java/javase/26/javadoc/javadoc-guide.pdf)
   Use for: understanding how Java source, class information, documentation comments, and doclets contribute to generated API documentation.
 - [Go doc comments](https://go.dev/doc/comment)
@@ -22,6 +24,10 @@
   Use for: understanding how TypeScript declarations and TSDoc/JSDoc-style comments are discovered and rendered.
 - [GitBook OpenAPI documentation](https://gitbook.com/docs/api-references/openapi)
   Use for: evaluating a managed, collaborative API-reference alternative.
+- [Docusaurus official plugins](https://docusaurus.io/docs/api/plugins)
+  Use for: separating official content/build capabilities from API-reference integrations.
+- [Docusaurus community resources](https://docusaurus.io/community/resources)
+  Use for: identifying OpenAPI, Redoc, and TypeDoc community integrations whose maintenance and compatibility must be evaluated separately.
 
 ## Wisdom
 

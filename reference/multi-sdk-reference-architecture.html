@@ -54,6 +54,19 @@
     </tbody>
   </table>
 
+  <h2>先说明“成熟”指什么</h2>
+  <p>“Python 最成熟”不能直接推导出“Python docstring 和自动生成最好”。选一个 SDK 作为基线前，应分别标记下面四种成熟度：</p>
+  <table>
+    <thead><tr><th>成熟度</th><th>要检查的问题</th><th>可以怎样用作基线</th></tr></thead>
+    <tbody>
+      <tr><td>功能覆盖</td><td>新功能是否通常首先在该 SDK 发布？</td><td>建立其他 SDK 的能力覆盖候选清单</td></tr>
+      <tr><td>公开 surface</td><td>方法、参数、类型、默认值和版本是否可追踪？</td><td>提取跨语言语义比较维度</td></tr>
+      <tr><td>注释完整度</td><td>公开方法是否有准确、结构一致的 docstring/doc comment？</td><td>评估能否直接从源码生成 Reference</td></tr>
+      <tr><td>生成与发布</td><td>源码变化能否经过可重复构建到达读者页面？</td><td>评估工程管线，而不是只比较内容数量</td></tr>
+    </tbody>
+  </table>
+  <p>在当前学习场景中，Python 是功能覆盖基线，但 docstring 与生成管线本身仍是要补齐和验证的对象。</p>
+
   <div class="callout">
     <strong>关于 Milvus 的边界</strong>
     <p>上表中的工具是学习用的典型例子，不声称复刻 Milvus 当前的生产流水线。需要判断真实实现时，应检查相应公开仓库的配置、依赖、构建命令和发布工作流。</p>
@@ -91,7 +104,7 @@ Node.js：已验证 / 不适用 / 缺少证据
 
   <div class="source">
     <strong>官方来源</strong>
-    <p><a href="https://spec.openapis.org/oas/latest.html">OpenAPI Specification</a> · <a href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">Sphinx autodoc</a> · <a href="https://docs.oracle.com/en/java/javase/26/javadoc/javadoc-guide.pdf">Javadoc Guide</a> · <a href="https://go.dev/doc/comment">Go doc comments</a> · <a href="https://typedoc.org/documents/Doc_Comments.html">TypeDoc comments</a></p>
+    <p><a href="https://spec.openapis.org/oas/latest.html">OpenAPI Specification</a> · <a href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">Sphinx autodoc</a> · <a href="https://github.com/milvus-io/pymilvus">PyMilvus</a> · <a href="https://docs.oracle.com/en/java/javase/26/javadoc/javadoc-guide.pdf">Javadoc Guide</a> · <a href="https://go.dev/doc/comment">Go doc comments</a> · <a href="https://typedoc.org/documents/Doc_Comments.html">TypeDoc comments</a></p>
   </div>
 
   <nav class="lesson-nav">

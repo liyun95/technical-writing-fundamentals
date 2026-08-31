@@ -20,7 +20,7 @@ The repository and site already created before this contract are **instructor-pr
 | 2 | Documentation architecture | Turn audiences and top tasks into a Diátaxis map and navigation hypothesis | Information architecture brief | 3 h |
 | 3 | Reference source strategy | Trace REST and multi-SDK facts from source through extraction to the reader-facing output | REST and multi-SDK source-to-reference map | 2–3 h |
 | 4 | OpenAPI as an engineering artifact | Change a minimal API contract, predict validation failure, then repair it | Reviewed OpenAPI change and validation note | 4 h |
-| 5 | Python SDK reference as a baseline | Read types/docstrings, identify reference gaps, test a public behavior, and derive comparison questions for other SDKs | Reviewed Python reference plan, test, and cross-SDK checklist | 4 h |
+| 5 | Python SDK reference pipeline | First generate Reference from docstrings in a synthetic SDK; then fork PyMilvus and run a controlled 1–2-method docstring experiment | Reproducible synthetic pipeline, reviewed PyMilvus patch, and source-to-output note | 6 h |
 | 6 | Documentation quality automation | Choose a quality risk, add a check, and interpret a failing run | CI/check design note and passing check | 4 h |
 | 7 | Multi-SDK governance and collaboration | Design a review and release check that detects semantic drift across REST, Python, Java, Go, and Node.js surfaces | Cross-SDK governance workflow and review evidence | 3 h |
 | 8 | Measurement and portfolio narrative | Define defensible quality indicators; tell the problem–decision–result story | Case study and short demo | 4–5 h |
@@ -38,4 +38,4 @@ The sprint is complete only when you can explain each major decision aloud, repr
 
 ## Starting point
 
-**Current lesson: Lesson 1 — Layered documentation-system selection.** You will follow one synthetic API change across REST and four SDK surfaces, then propose how the portal, reference pipelines, and governance layer should work together.
+**Current lesson: Lesson 1 — Layered documentation-system selection.** The layered reasoning exercise is complete; the remaining learner-owned evidence is an ADR revision that records the portal, REST, SDK, and governance boundaries and the conditions that would trigger re-evaluation.
