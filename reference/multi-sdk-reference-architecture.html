@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REST 与多 SDK Reference 架构速查</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <div class="eyebrow">Reference · Traceability Map</div>
+  <h1>REST 与多 SDK Reference 架构速查</h1>
+  <p class="lede">面对一个参数或方法变更，先沿着“事实源 → 提取/生成 → 读者输出”追踪，再决定哪个检查值得自动化。</p>
+
+  <div class="callout">
+    <strong>统一入口 ≠ 统一事实来源</strong>
+    <p>一个门户可以让所有 Reference 看起来属于同一产品，但 REST、Python、Java、Go 和 Node.js 仍应保留各自可追溯的技术源与生成边界。</p>
+  </div>
+
+  <h2>四层模型</h2>
+  <div class="layer-flow">
+    <article class="layer-card portal">
+      <span class="layer-tag">01 · PORTAL</span>
+      <h3>统一读者体验</h3>
+      <p>导航、搜索、教程、How-to、概念，以及 Reference 的入口。</p>
+    </article>
+    <article class="layer-card contract">
+      <span class="layer-tag">02 · REST</span>
+      <h3>接口契约与渲染</h3>
+      <p>OpenAPI 中的 paths、parameters、schemas、responses。</p>
+    </article>
+    <article class="layer-card sdk">
+      <span class="layer-tag">03 · SDK</span>
+      <h3>语言原生事实</h3>
+      <p>公开声明、类型、docstring/doc comment 与弃用标记。</p>
+    </article>
+    <article class="layer-card governance">
+      <span class="layer-tag">04 · GOVERN</span>
+      <h3>一致性与发布</h3>
+      <p>版本矩阵、CI、覆盖率、术语、链接和跨 surface 检查。</p>
+    </article>
+  </div>
+
+  <h2>事实源到输出</h2>
+  <table>
+    <thead><tr><th>Surface</th><th>事实源</th><th>典型提取或生成边界</th><th>读者输出</th></tr></thead>
+    <tbody>
+      <tr><td>REST</td><td>OpenAPI 文档中的路径、参数、schema、响应和错误</td><td>OpenAPI 校验器 + 独立 generator/renderer</td><td>REST API Reference、交互请求、派生客户端或测试输入</td></tr>
+      <tr><td>Python</td><td>公开签名、类型、docstring、导出和弃用信息</td><td>Sphinx/autodoc 或经仓库验证的等价管线</td><td>Python SDK Reference</td></tr>
+      <tr><td>Java</td><td>公开类与方法、类型、documentation comments</td><td>Javadoc/doclet 或经仓库验证的等价管线</td><td>Java SDK Reference</td></tr>
+      <tr><td>Go</td><td>导出的 package、type、func 与相邻 doc comments</td><td><code>go doc</code>、pkgsite 或经仓库验证的等价管线</td><td>Go SDK Reference</td></tr>
+      <tr><td>Node.js</td><td>TypeScript/JavaScript 公开声明、类型与 TSDoc/JSDoc 风格注释</td><td>TypeDoc 或经仓库验证的等价管线</td><td>Node.js SDK Reference</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>关于 Milvus 的边界</strong>
+    <p>上表中的工具是学习用的典型例子，不声称复刻 Milvus 当前的生产流水线。需要判断真实实现时，应检查相应公开仓库的配置、依赖、构建命令和发布工作流。</p>
+  </div>
+
+  <h2>比较语义，不比较拼写</h2>
+  <p>同一个能力在不同语言中不一定同名或同形。Python 可能使用 <code>consistency_level</code>，Java 或 Node.js 可能采用 <code>consistencyLevel</code>，Go 可能把它放进 options struct。需要核对的是：</p>
+  <ul>
+    <li>这个能力是否存在，适用于哪些操作；</li>
+    <li>类型、允许值、默认值和是否必填是否一致；</li>
+    <li>错误、弃用状态、版本可用性和示例行为是否一致；</li>
+    <li>语言惯用法造成的差异是否被明确记录。</li>
+  </ul>
+
+  <h2>漂移排查算法</h2>
+  <ol>
+    <li><strong>命名变更概念：</strong>先写“新增一致性级别选择”，不要从某个语言的参数拼写开始。</li>
+    <li><strong>列出公开 surface：</strong>REST、Python、Java、Go、Node.js；标明不支持、未发布或待验证，避免默认全部同步。</li>
+    <li><strong>回到各自事实源：</strong>核对签名、类型、默认值、允许值、错误和版本。</li>
+    <li><strong>比较语义：</strong>区分真实能力差异与语言惯用表达差异。</li>
+    <li><strong>检查读者输出：</strong>确认生成页面、导航、搜索和版本标签展示的是预期版本。</li>
+    <li><strong>自动化稳定规则：</strong>优先自动检查可机器判定的 surface 存在性、类型或枚举；把行为解释保留给人工评审。</li>
+  </ol>
+
+  <h2>一个最小治理记录</h2>
+  <div class="response">变更概念：……
+目标版本：……
+REST：已验证 / 不适用 / 缺少证据
+Python：已验证 / 不适用 / 缺少证据
+Java：已验证 / 不适用 / 缺少证据
+Go：已验证 / 不适用 / 缺少证据
+Node.js：已验证 / 不适用 / 缺少证据
+自动检查：……
+仍需人工判断：……</div>
+
+  <div class="source">
+    <strong>官方来源</strong>
+    <p><a href="https://spec.openapis.org/oas/latest.html">OpenAPI Specification</a> · <a href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">Sphinx autodoc</a> · <a href="https://docs.oracle.com/en/java/javase/26/javadoc/javadoc-guide.pdf">Javadoc Guide</a> · <a href="https://go.dev/doc/comment">Go doc comments</a> · <a href="https://typedoc.org/documents/Doc_Comments.html">TypeDoc comments</a></p>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="framework-selection-cheatsheet.html">← 分层选型速查</a>
+    <a href="../lessons/0001-select-a-documentation-framework.html">返回 Lesson 1 →</a>
+  </nav>
+</main>
+</body>
+</html>

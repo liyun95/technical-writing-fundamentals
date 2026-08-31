@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>分层文档工具选型速查表</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <div class="eyebrow">Reference · Layered Decision Aid</div>
+  <h1>先识别所选层次</h1>
+  <p class="lede">不要先问“哪个文档框架最好”。先问：我是在选择统一门户、REST Reference 管线、某一种 SDK Reference 管线，还是质量治理方式？</p>
+
+  <div class="callout">
+    <strong>一句话判断</strong>
+    <p>门户统一的是读者入口；OpenAPI 或语言源码提供的是技术事实；生成器把事实变成页面；治理层检查这些页面是否仍然表达同一组能力。</p>
+  </div>
+
+  <h2>四层定位</h2>
+  <div class="layer-flow">
+    <article class="layer-card portal">
+      <span class="layer-tag">PORTAL</span>
+      <h3>门户层</h3>
+      <p>教程、How-to、概念、统一导航、搜索和发布体验。</p>
+    </article>
+    <article class="layer-card contract">
+      <span class="layer-tag">REST</span>
+      <h3>接口契约层</h3>
+      <p>OpenAPI 描述可观察的 REST 接口，再由工具校验和渲染。</p>
+    </article>
+    <article class="layer-card sdk">
+      <span class="layer-tag">SDK</span>
+      <h3>源码提取层</h3>
+      <p>各语言的公开声明、类型和注释经过原生工具链生成 Reference。</p>
+    </article>
+    <article class="layer-card governance">
+      <span class="layer-tag">GOVERNANCE</span>
+      <h3>质量治理层</h3>
+      <p>版本、CI、覆盖率、术语和跨 SDK 语义一致性检查。</p>
+    </article>
+  </div>
+  <p><strong>边界提醒：</strong>真实工具可能跨层。例如 GitBook 同时提供门户和 OpenAPI 展示能力，Sphinx 也可以发布整站。本模型的作用是先分清当前决策的主要责任，不是给工具贴永久标签。</p>
+
+  <h2>六步决策算法</h2>
+  <ol>
+    <li><strong>命名层次：</strong>这次要解决门户、REST、某个 SDK，还是治理问题？</li>
+    <li><strong>指出事实源：</strong>哪些信息必须先在契约、源码、类型或注释里成立？</li>
+    <li><strong>定义输出：</strong>读者最终看到页面、交互式 Reference、IDE 提示，还是多个输出？</li>
+    <li><strong>列硬门槛：</strong>不满足就淘汰，例如必须能在 CI 中重复构建。</li>
+    <li><strong>查官方证据：</strong>区分核心能力、插件能力和托管产品能力；没证据就标记“待验证”。</li>
+    <li><strong>写后果与反转条件：</strong>选择带来了什么维护责任？什么变化会让结论失效？</li>
+  </ol>
+
+  <h2>同层比较：门户候选</h2>
+  <table>
+    <thead><tr><th>候选</th><th>主要获得</th><th>主要责任</th><th>先验证什么</th></tr></thead>
+    <tbody>
+      <tr><td>Docusaurus</td><td>Markdown/MDX、React 定制、自主管理静态站点</td><td>Node/React 依赖、插件集成、版本快照维护</td><td>团队能否维护前端栈；外部 Reference 如何接入</td></tr>
+      <tr><td>MkDocs</td><td>Markdown-first、Python 工具链、较小的上手面</td><td>主题和功能常来自独立插件</td><td>所需能力属于核心、主题还是插件；版本如何锁定</td></tr>
+      <tr><td>GitBook</td><td>托管协作、网页编辑和 OpenAPI 展示</td><td>依赖托管产品的工作流与能力边界</td><td>本地构建、CI 控制、导入导出和权限要求</td></tr>
+    </tbody>
+  </table>
+  <p>这里没有默认赢家。若公开作品集需要展示自主管理的 docs-as-code 构建，Docusaurus 或 MkDocs 的证据更直接；若非工程贡献者的网页协作是首要约束，结论可能转向 GitBook。</p>
+
+  <h2>同层比较：REST Reference</h2>
+  <table>
+    <thead><tr><th>策略</th><th>获得</th><th>代价与漂移风险</th><th>反转条件</th></tr></thead>
+    <tbody>
+      <tr><td>手写 Reference</td><td>叙述和页面结构高度自由</td><td>接口改动后需要人工同步；难以系统校验参数与 schema</td><td>接口很小、稳定且没有可维护的契约</td></tr>
+      <tr><td>OpenAPI 驱动</td><td>契约可校验，并可派生 Reference、Mock（按契约返回预设响应的模拟服务）、测试或客户端</td><td>需要维护 spec 质量、生成配置和人工补充的任务上下文</td><td>OpenAPI 并非实际接口的可信来源，或关键行为无法由其表达</td></tr>
+    </tbody>
+  </table>
+
+  <h2>同层比较：SDK Reference</h2>
+  <table>
+    <thead><tr><th>策略</th><th>适合什么</th><th>需要警惕</th></tr></thead>
+    <tbody>
+      <tr><td>通用页面手写</td><td>少量稳定 API、需要大量解释性内容</td><td>签名、类型、弃用信息容易与源码漂移</td></tr>
+      <tr><td>语言原生提取</td><td>公开 surface 较大、签名随版本演进</td><td>每种语言仍有独立环境与规则，不能靠一个门户生成器抹平</td></tr>
+    </tbody>
+  </table>
+  <p>本课程把 Sphinx/autodoc 作为 Python 提取管线的典型例子，而不是要求它与 Docusaurus 竞争“唯一总站框架”。Java、Go 和 Node.js 分别从各自的公开声明、类型与注释出发。</p>
+
+  <div class="checkpoint">
+    <strong>写 ADR 前的五个空格</strong>
+    <div class="response">本次选择的层次：……
+事实来源：……
+读者输出：……
+选择与主要后果：……
+反转条件：……</div>
+  </div>
+
+  <div class="source">
+    <strong>官方来源入口</strong>
+    <p><a href="https://docusaurus.io/docs">Docusaurus</a> · <a href="https://www.mkdocs.org/">MkDocs</a> · <a href="https://gitbook.com/docs">GitBook</a> · <a href="https://spec.openapis.org/oas/latest.html">OpenAPI Specification</a> · <a href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">Sphinx autodoc</a></p>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="../lessons/0001-select-a-documentation-framework.html">← 返回 Lesson 1</a>
+    <a href="multi-sdk-reference-architecture.html">多 SDK 架构速查 →</a>
+  </nav>
+</main>
+</body>
+</html>
