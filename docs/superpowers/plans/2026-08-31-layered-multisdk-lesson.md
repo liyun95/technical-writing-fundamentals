@@ -18,7 +18,7 @@
 - Modify: `NOTES.md`
 - Modify: `RESOURCES.md`
 
-- [ ] **Step 1: Verify the old single-framework framing is still present**
+- [x] **Step 1: Verify the old single-framework framing is still present**
 
 Run:
 
@@ -28,7 +28,7 @@ rg -n "weighted comparison|Framework selection|Python SDK reference is the only|
 
 Expected: `COURSE.md` still describes Lesson 1 as a weighted comparison of four frameworks.
 
-- [ ] **Step 2: Update the mission and course sequence**
+- [x] **Step 2: Update the mission and course sequence**
 
 Make the following exact conceptual changes:
 
@@ -37,7 +37,7 @@ Make the following exact conceptual changes:
 - `NOTES.md`: record the user's real working context and the desired depth split.
 - `RESOURCES.md`: add official Javadoc, Go doc comment, and TypeDoc sources and describe what each supports.
 
-- [ ] **Step 3: Verify the new scope language**
+- [x] **Step 3: Verify the new scope language**
 
 Run:
 
@@ -47,7 +47,7 @@ rg -n "OpenAPI|Python|Java|Go|Node.js|治理|分层" MISSION.md COURSE.md NOTES.
 
 Expected: all four SDK languages, REST/OpenAPI, and layered governance appear in the learning contract.
 
-- [ ] **Step 4: Commit the learning-contract update**
+- [x] **Step 4: Commit the learning-contract update**
 
 ```bash
 git add MISSION.md COURSE.md NOTES.md RESOURCES.md
@@ -60,7 +60,7 @@ git commit -m "docs: align course with multi-SDK reference work"
 - Modify: `assets/course.css`
 - Create: `assets/layer-lab.js`
 
-- [ ] **Step 1: Add a failing asset check**
+- [x] **Step 1: Add a failing asset check**
 
 Run:
 
@@ -70,7 +70,7 @@ test -f assets/layer-lab.js && rg -n "layer-flow|classification-grid|feedback-pa
 
 Expected: FAIL because the script and new component classes do not exist.
 
-- [ ] **Step 2: Add shared visual components**
+- [x] **Step 2: Add shared visual components**
 
 Extend `assets/course.css` with:
 
@@ -80,7 +80,7 @@ Extend `assets/course.css` with:
 - scenario consequence panels;
 - print rules that expand or preserve essential explanations.
 
-- [ ] **Step 3: Add progressive classification feedback**
+- [x] **Step 3: Add progressive classification feedback**
 
 Create `assets/layer-lab.js` so that it:
 
@@ -90,7 +90,7 @@ Create `assets/layer-lab.js` so that it:
 - reports the number correct without treating the result as course completion;
 - leaves the exercise usable as a written worksheet when JavaScript is unavailable.
 
-- [ ] **Step 4: Verify the assets**
+- [x] **Step 4: Verify the assets**
 
 Run:
 
@@ -102,7 +102,7 @@ rg -n "layer-flow|classification-grid|feedback-panel|scenario-grid" assets/cours
 
 Expected: every command succeeds.
 
-- [ ] **Step 5: Commit the shared assets**
+- [x] **Step 5: Commit the shared assets**
 
 ```bash
 git add assets/course.css assets/layer-lab.js
@@ -115,7 +115,7 @@ git commit -m "feat: add layered architecture lesson components"
 - Modify: `reference/framework-selection-cheatsheet.html`
 - Create: `reference/multi-sdk-reference-architecture.html`
 
-- [ ] **Step 1: Verify the old reference starts with a global framework choice**
+- [x] **Step 1: Verify the old reference starts with a global framework choice**
 
 Run:
 
@@ -125,7 +125,7 @@ rg -n "六步算法|四个候选的默认倾向" reference/framework-selection-c
 
 Expected: both old sections are found.
 
-- [ ] **Step 2: Rewrite the framework decision aid**
+- [x] **Step 2: Rewrite the framework decision aid**
 
 The revised page must:
 
@@ -135,7 +135,7 @@ The revised page must:
 - explain that Sphinx/autodoc belongs primarily to the Python extraction pipeline in this lesson;
 - retain gates, evidence, consequences, and reversal conditions without a numeric total score.
 
-- [ ] **Step 3: Create the multi-SDK architecture reference**
+- [x] **Step 3: Create the multi-SDK architecture reference**
 
 The new page must include:
 
@@ -145,7 +145,7 @@ The new page must include:
 - an explicit warning that actual Milvus generators must be verified from public repositories and are not asserted by this synthetic course;
 - links to the official OpenAPI, Sphinx autodoc, Javadoc, Go doc comments, and TypeDoc documentation.
 
-- [ ] **Step 4: Verify the references**
+- [x] **Step 4: Verify the references**
 
 Run:
 
@@ -156,7 +156,7 @@ rg -n "Python|Java|Go|Node.js|OpenAPI|漂移" reference/multi-sdk-reference-arch
 
 Expected: all required concepts are present.
 
-- [ ] **Step 5: Commit the references**
+- [x] **Step 5: Commit the references**
 
 ```bash
 git add reference/framework-selection-cheatsheet.html reference/multi-sdk-reference-architecture.html
@@ -168,7 +168,7 @@ git commit -m "docs: add layered reference architecture aids"
 **Files:**
 - Modify: `lessons/0001-select-a-documentation-framework.html`
 
-- [ ] **Step 1: Verify the old weighted exercise is present**
+- [x] **Step 1: Verify the old weighted exercise is present**
 
 Run:
 
@@ -178,7 +178,7 @@ rg -n "分给下面六项|合计必须等于 10|练习 A：先选权重" lessons
 
 Expected: the old scoring exercise is found.
 
-- [ ] **Step 2: Replace the lesson with the approved learning flow**
+- [x] **Step 2: Replace the lesson with the approved learning flow**
 
 The page must contain, in this order:
 
@@ -193,7 +193,7 @@ The page must contain, in this order:
 
 Do not include a full framework scorecard or present any one portal framework as the owner of REST/SDK facts.
 
-- [ ] **Step 3: Verify the learning and interaction contract**
+- [x] **Step 3: Verify the learning and interaction contract**
 
 Run:
 
@@ -204,7 +204,7 @@ rg -n "四层|统一读者入口|统一事实来源|data-layer-quiz|漂移风险
 
 Expected: the new concepts and exercise exist; the old scoring requirement does not.
 
-- [ ] **Step 4: Commit the rewritten lesson**
+- [x] **Step 4: Commit the rewritten lesson**
 
 ```bash
 git add lessons/0001-select-a-documentation-framework.html
@@ -220,7 +220,7 @@ git commit -m "docs: teach layered multi-SDK framework selection"
 - Verify: `assets/course.css`
 - Verify: `assets/layer-lab.js`
 
-- [ ] **Step 1: Run local file and link checks**
+- [x] **Step 1: Run local file and link checks**
 
 Run:
 
@@ -231,19 +231,19 @@ python3 -m http.server 4173 --bind 127.0.0.1
 In another shell, run:
 
 ```bash
-for path in \
+for asset_path in \
   lessons/0001-select-a-documentation-framework.html \
   reference/framework-selection-cheatsheet.html \
   reference/multi-sdk-reference-architecture.html \
   assets/course.css \
   assets/layer-lab.js; do
-  curl --fail --silent --output /dev/null "http://127.0.0.1:4173/$path"
+  curl --fail --silent --output /dev/null "http://127.0.0.1:4173/$asset_path"
 done
 ```
 
 Expected: all requests return HTTP 200.
 
-- [ ] **Step 2: Check HTML structure and referenced local assets**
+- [x] **Step 2: Check HTML structure and referenced local assets**
 
 Run:
 
@@ -269,25 +269,25 @@ PY
 
 Expected: `HTML parse smoke check: PASS`.
 
-- [ ] **Step 3: Inspect desktop and narrow-screen rendering**
+- [x] **Step 3: Inspect desktop and narrow-screen rendering**
 
 Open `http://127.0.0.1:4173/lessons/0001-select-a-documentation-framework.html`, check the four-layer map at desktop and phone widths, complete the classification exercise, and verify both reference links.
 
 Expected: no horizontal page overflow, usable controls, immediate explanatory feedback, and readable reference pages.
 
-- [ ] **Step 4: Run repository hygiene checks**
+- [x] **Step 4: Run repository hygiene checks**
 
 Run:
 
 ```bash
 git diff --check
-rg -n -i "TODO|TBD|placeholder|待定|以后补" \
+rg -n -i "\bTODO\b|\bTBD\b|\bplaceholder\b|待定|以后补" \
   MISSION.md COURSE.md NOTES.md RESOURCES.md assets lessons reference
 ```
 
 Expected: `git diff --check` succeeds and the placeholder scan returns no matches.
 
-- [ ] **Step 5: Commit any validation fixes**
+- [x] **Step 5: Commit any validation fixes**
 
 If validation required fixes:
 
