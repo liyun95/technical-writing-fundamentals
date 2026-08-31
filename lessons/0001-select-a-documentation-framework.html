@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 1 — 分层选择文档工具</title>
+  <link rel="stylesheet" href="../assets/course.css">
+  <script src="../assets/layer-lab.js" defer></script>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Lesson 1 · Layered Architecture Judgment</div>
+  <h1>先分层，再选型</h1>
+  <p class="lede">你不是要为整个文档系统选出一个“万能框架”。这节课会用一次 API 变更，带你判断门户、REST Reference、多 SDK Reference 和质量治理分别需要做什么决定。</p>
+
+  <div class="meta">
+    <span class="pill">建议用时 45–60 分钟</span>
+    <span class="pill">前置：已通过 Lesson 0</span>
+    <span class="pill">产出：你的分层架构决策</span>
+  </div>
+
+  <div class="checkpoint">
+    <strong>这节课的一个胜利</strong>
+    <p>完成后，你看到 Docusaurus、OpenAPI、Sphinx 或 TypeDoc 时，不会急着给它们排总名次，而会先指出：它主要解决哪一层的问题，事实从哪里来，代价落在谁身上。</p>
+  </div>
+
+  <h2>从一次真实形态的变更开始</h2>
+  <p>假设一个<strong>合成的向量检索服务</strong>要给“创建 collection”能力新增一致性级别。REST 和四种 SDK 都计划在下一版本提供这项能力：</p>
+  <table>
+    <thead><tr><th>Surface</th><th>可能的公开表达</th><th>首先要核对的事实</th></tr></thead>
+    <tbody>
+      <tr><td>REST</td><td><code>consistencyLevel</code> request field</td><td>schema、允许值、默认值、错误响应</td></tr>
+      <tr><td>Python</td><td><code>consistency_level: ConsistencyLevel</code></td><td>签名、类型、docstring、版本</td></tr>
+      <tr><td>Java</td><td><code>.consistencyLevel(...)</code></td><td>公开方法、类型、Javadoc、版本</td></tr>
+      <tr><td>Go</td><td><code>ConsistencyLevel</code> option</td><td>导出字段、类型、doc comment、版本</td></tr>
+      <tr><td>Node.js</td><td><code>consistencyLevel?: ConsistencyLevel</code></td><td>公开声明、类型、注释、版本</td></tr>
+    </tbody>
+  </table>
+  <p>这些名字只是练习输入，并不代表 Milvus 当前生产 API。真正工作时，你必须回到各公开仓库验证。</p>
+
+  <details>
+    <summary>先想 20 秒：只改 Docusaurus 页面会怎样？</summary>
+    <p>页面可能描述了新参数，但接口契约或某些 SDK 根本没有发布；也可能源码已经支持，生成页面和导航却没有更新。门户能统一入口，却不能自动成为五套技术事实的所有者。</p>
+  </details>
+
+  <h2>一个变更要经过四层</h2>
+  <div class="layer-flow">
+    <article class="layer-card portal">
+      <span class="layer-tag">01 · PORTAL</span>
+      <h3>文档门户</h3>
+      <p>把教程、How-to、概念和各类 Reference 组织为一个读者体验。</p>
+    </article>
+    <article class="layer-card contract">
+      <span class="layer-tag">02 · REST</span>
+      <h3>接口契约</h3>
+      <p>OpenAPI 描述 REST 接口可观察到的路径、参数、schema 和响应。</p>
+    </article>
+    <article class="layer-card sdk">
+      <span class="layer-tag">03 · SDK</span>
+      <h3>源码提取</h3>
+      <p>每种语言从自己的公开声明、类型和注释生成 SDK Reference。</p>
+    </article>
+    <article class="layer-card governance">
+      <span class="layer-tag">04 · GOVERN</span>
+      <h3>质量治理</h3>
+      <p>CI、版本矩阵和人工评审共同发现缺页、错误版本和语义漂移。</p>
+    </article>
+  </div>
+
+  <div class="callout">
+    <strong>必须记住的区别</strong>
+    <p><strong>统一读者入口</strong>解决“用户去哪里找”；<strong>统一事实来源</strong>解决“某项事实在哪里首先成立”。多 SDK 系统通常需要前者，但不应假装所有语言共享同一个源码事实。</p>
+  </div>
+
+  <h2>点击一层，观察它的输入和失败点</h2>
+  <div class="layer-switcher" role="tablist" aria-label="查看文档架构层次">
+    <button type="button" role="tab" aria-selected="true" data-layer-trigger="portal">门户发布</button>
+    <button type="button" role="tab" aria-selected="false" data-layer-trigger="rest">接口契约</button>
+    <button type="button" role="tab" aria-selected="false" data-layer-trigger="sdk">源码提取</button>
+    <button type="button" role="tab" aria-selected="false" data-layer-trigger="governance">质量治理</button>
+  </div>
+
+  <section class="layer-panel" data-layer-panel="portal">
+    <h3>门户层：统一体验，不重写全部事实</h3>
+    <div class="source-output">
+      <div><small>输入</small>手写任务内容、导航配置、各 Reference 输出地址</div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div><small>输出</small>统一导航、搜索、版本入口和发布站点</div>
+    </div>
+    <p><strong>常见失败：</strong>生成成功但没有入口；旧版本链接到新 Reference；门户插件让事实来源变得不可追踪。</p>
+  </section>
+
+  <section class="layer-panel" data-layer-panel="rest" hidden>
+    <h3>REST 层：契约先成立，再生成展示</h3>
+    <div class="source-output">
+      <div><small>输入</small>OpenAPI 中的 path、operation、parameter、schema、response</div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div><small>输出</small>经校验的 REST Reference，以及可选的 Mock、测试或客户端输入</div>
+    </div>
+    <p><strong>Mock 是什么？</strong>它是按照契约返回预设响应的模拟服务，让前端或文档示例在真实后端尚未就绪时也能对接；它不等于真实业务实现。</p>
+  </section>
+
+  <section class="layer-panel" data-layer-panel="sdk" hidden>
+    <h3>SDK 层：每种语言保留自己的事实边界</h3>
+    <div class="source-output">
+      <div><small>输入</small>Python/Java/Go/Node.js 的公开签名、类型、注释和导出</div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div><small>输出</small>语言惯用、与对应 SDK 版本一致的 Reference</div>
+    </div>
+    <p><strong>常见失败：</strong>为了页面整齐而手抄签名；生成器读取了错误分支；把语言惯用差异误判为能力不一致。</p>
+  </section>
+
+  <section class="layer-panel" data-layer-panel="governance" hidden>
+    <h3>治理层：验证共同语义，不强迫共同拼写</h3>
+    <div class="source-output">
+      <div><small>输入</small>版本矩阵、公开 surface 清单、质量规则和评审标准</div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div><small>输出</small>CI 结果、缺口清单、发布门禁和需要人工判断的差异</div>
+    </div>
+    <p><strong>常见失败：</strong>只检查页面是否存在，不检查默认值、允许值和版本；或要求所有语言使用相同参数名。</p>
+  </section>
+
+  <h2>为什么原来的“框架总排名”让人难以理解</h2>
+  <table>
+    <thead><tr><th>你看到的名称</th><th>这节课主要把它放在哪一层</th><th>正确的比较对象</th></tr></thead>
+    <tbody>
+      <tr><td>Docusaurus / MkDocs / GitBook</td><td>门户层</td><td>其他门户方案的协作、构建、定制和生命周期代价</td></tr>
+      <tr><td>OpenAPI + renderer</td><td>REST 层</td><td>手写 REST Reference 或其他契约驱动管线</td></tr>
+      <tr><td>Sphinx/autodoc</td><td>本课中的 Python SDK 层</td><td>其他 Python 源码提取与 Reference 生成方式</td></tr>
+      <tr><td>Javadoc / Go doc / TypeDoc</td><td>相应语言的 SDK 层</td><td>同一种语言中的生成方式和维护约束</td></tr>
+      <tr><td>CI / 检查脚本 / 模板</td><td>治理层</td><td>不同风险对应的自动检查与人工评审方式</td></tr>
+    </tbody>
+  </table>
+  <p>工具可以跨层，但决策必须先有主语。与其问“Docusaurus 和 Sphinx 谁更好”，不如分别问“门户如何发布”和“Python Reference 如何从源码提取”。</p>
+
+  <h2>同层选择才有可解释的后果</h2>
+  <div class="scenario-grid">
+    <article class="scenario">
+      <h3>门户：自主管理还是托管协作？</h3>
+      <p>Docusaurus/MkDocs 更容易展示可重复的本地构建；GitBook 更突出托管协作与网页编辑。</p>
+      <details><summary>展开看代价与反转条件</summary><p>自主管理增加依赖升级和集成责任；托管方案增加平台边界与迁移问题。若非工程贡献者必须直接网页编辑，结论可能转向托管协作。</p></details>
+    </article>
+    <article class="scenario">
+      <h3>REST：手写还是 OpenAPI 驱动？</h3>
+      <p>OpenAPI 驱动让参数和 schema 可校验、可派生；手写页面在叙述上更自由。</p>
+      <details><summary>展开看代价与反转条件</summary><p>OpenAPI 需要可靠契约和生成边界；手写需要人工同步。若 spec 并不代表真实接口，它就不能仅凭“可生成”成为可信来源。</p></details>
+    </article>
+    <article class="scenario">
+      <h3>SDK：手抄页面还是语言原生提取？</h3>
+      <p>原生提取更容易追踪签名和类型；手写适合少量稳定 API 或解释性补充。</p>
+      <details><summary>展开看代价与反转条件</summary><p>原生工具链意味着多套环境和规则。若公开 surface 很小且长期稳定，建立完整生成管线的收益可能不足。</p></details>
+    </article>
+    <article class="scenario">
+      <h3>治理：统一拼写还是统一语义？</h3>
+      <p>跨语言检查应比较能力、类型、默认值、允许值和版本，不应强迫相同命名风格。</p>
+      <details><summary>展开看代价与反转条件</summary><p>语义映射需要维护一份能力矩阵。只有当多 SDK 实际由同一 IDL 稳定生成时，才可能把更多一致性责任上移到共同生成源。</p></details>
+    </article>
+  </div>
+
+  <div class="exercise">
+    <h2>练习 A：把对象放回正确层次</h2>
+    <p>为下面七项选择它们<strong>主要</strong>承担的层次。四个选项都使用相同长度的标签，避免视觉提示。提交后会立即看到解释；这只是练习反馈，不代表本课已经通过。</p>
+
+    <form data-layer-quiz>
+      <div class="classification-grid">
+        <div class="classification-item">
+          <label>Docusaurus 的导航与版本入口
+            <select data-answer="portal" data-explanation="它组织读者看到的入口，不拥有 REST 或 SDK 的底层事实。">
+              <option value="">请选择</option><option value="portal">门户发布</option><option value="contract">接口契约</option><option value="sdk">源码提取</option><option value="governance">质量治理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>OpenAPI 中的 request schema
+            <select data-answer="contract" data-explanation="它描述 REST 请求可观察到的数据结构，属于接口契约。">
+              <option value="">请选择</option><option value="portal">门户发布</option><option value="contract">接口契约</option><option value="sdk">源码提取</option><option value="governance">质量治理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>Python 的公开签名与 docstring
+            <select data-answer="sdk" data-explanation="它们是 Python Reference 可提取的语言原生事实。">
+              <option value="">请选择</option><option value="portal">门户发布</option><option value="contract">接口契约</option><option value="sdk">源码提取</option><option value="governance">质量治理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>Java 的公开方法与 Javadoc comment
+            <select data-answer="sdk" data-explanation="它们属于 Java 自己的源码与注释事实边界。">
+              <option value="">请选择</option><option value="portal">门户发布</option><option value="contract">接口契约</option><option value="sdk">源码提取</option><option value="governance">质量治理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>Go 的导出类型与 doc comment
+            <select data-answer="sdk" data-explanation="Go 工具从导出声明和相邻注释形成语言原生 Reference。">
+              <option value="">请选择</option><option value="portal">门户发布</option><option value="contract">接口契约</option><option value="sdk">源码提取</option><option value="governance">质量治理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>Node.js 的 TypeScript 声明与注释
+            <select data-answer="sdk" data-explanation="公开声明、类型和注释先在 Node.js/TypeScript 源码边界成立。">
+              <option value="">请选择</option><option value="portal">门户发布</option><option value="contract">接口契约</option><option value="sdk">源码提取</option><option value="governance">质量治理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>CI 检查五个 surface 的允许值
+            <select data-answer="governance" data-explanation="它比较多个事实源的共同语义，属于跨 surface 质量治理。">
+              <option value="">请选择</option><option value="portal">门户发布</option><option value="contract">接口契约</option><option value="sdk">源码提取</option><option value="governance">质量治理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="primary-action" type="submit">检查分层</button>
+        <span class="feedback-panel" data-quiz-feedback aria-live="polite"></span>
+      </div>
+      <noscript><p>当前浏览器未运行 JavaScript。你仍可把七项答案发给我，我会逐项反馈。</p></noscript>
+    </form>
+  </div>
+
+  <div class="exercise">
+    <h2>练习 B：写你的分层架构决策</h2>
+    <p>不要先写工具总分。在聊天里用下面七行提交判断；可以写“缺少证据”，但要指出准备查什么。</p>
+    <div class="response">1. 门户层：我会……，因为……
+2. REST 层：事实来源与生成边界是……
+3. Python 基线：我会从它验证……
+4. Java / Go / Node.js：我不会重建三套管线，而会先……
+5. 一个跨 SDK 漂移风险是……
+6. 对应的验证办法是……
+7. 如果……发生，我会重新评估上述选择。</div>
+  </div>
+
+  <details>
+    <summary>提交前自检：不要偷换成“一个框架解决全部”</summary>
+    <ul>
+      <li>你明确写出了门户、REST、SDK 和治理四层。</li>
+      <li>门户负责统一体验，但不是所有 API 技术事实的所有者。</li>
+      <li>Python 是成熟基线，用来提出跨 SDK 检查问题，不是唯一要维护的 SDK。</li>
+      <li>你的漂移风险包含可检查的事实，例如类型、默认值、允许值或版本。</li>
+      <li>你的结论包含代价和反转条件，而不只是工具优点。</li>
+    </ul>
+  </details>
+
+  <div class="source">
+    <strong>本节主来源</strong>
+    <p>先看短版的<a href="../reference/multi-sdk-reference-architecture.html">多 SDK 架构速查</a>，再按你的疑问回到官方资料：<a href="https://spec.openapis.org/oas/latest.html">OpenAPI Specification</a>、<a href="https://docusaurus.io/docs">Docusaurus</a>、<a href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">Sphinx autodoc</a>、<a href="https://docs.oracle.com/en/java/javase/26/javadoc/javadoc-guide.pdf">Javadoc</a>、<a href="https://go.dev/doc/comment">Go doc comments</a>、<a href="https://typedoc.org/documents/Doc_Comments.html">TypeDoc</a>。</p>
+  </div>
+
+  <div class="checkpoint">
+    <strong>完成标准</strong>
+    <p>练习 A 的即时反馈用于修正分层；真正通过需要你提交练习 B，并能在追问中解释四层、Python 基线的作用、一个跨 SDK 漂移风险及其验证方法。通过后，你再亲自修订 ADR，届时才会新增学习记录。</p>
+  </div>
+
+  <p>如果你不知道某个工具属于哪一层，或者不知道实际 Milvus 仓库使用什么生成器，请直接问我。写“缺少证据”比根据工具名称猜测更专业。</p>
+
+  <nav class="lesson-nav">
+    <a href="0000-read-the-learning-environment.html">← Lesson 0</a>
+    <a href="../reference/framework-selection-cheatsheet.html">分层选型速查 →</a>
+  </nav>
+</main>
+</body>
+</html>
