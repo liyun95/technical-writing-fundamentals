@@ -15,7 +15,7 @@
 - [Sphinx autodoc](https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html)
   Use for: tracing Python signatures and docstrings through import-based reference extraction, including its CI environment and import-side-effect risks.
 - [PyMilvus repository](https://github.com/milvus-io/pymilvus)
-  Use for: the second-stage public-source audit of one or two real Python SDK methods after the synthetic pipeline works; verify signatures, implementation, tests, tags, and existing docstrings before authoring.
+  Use for: the second-stage public-source audit of one or two real Python SDK methods after the course-built minimal SDK pipeline works; verify signatures, implementation, tests, tags, and existing docstrings before authoring.
 - [Javadoc Guide](https://docs.oracle.com/en/java/javase/26/javadoc/javadoc-guide.pdf)
   Use for: understanding how Java source, class information, documentation comments, and doclets contribute to generated API documentation.
 - [Go doc comments](https://go.dev/doc/comment)
