@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 0 — 读懂学习环境</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <div class="eyebrow">Lesson 0 · Orientation</div>
+  <h1>先看懂系统，再修改系统</h1>
+  <p class="lede">这节课只有一个目标：你能分清“事实来源、发布界面、工程决策、自动化命令”分别住在哪里。高级 technical writer 的工程感，往往就从这种边界意识开始。</p>
+
+  <div class="meta">
+    <span class="pill">建议用时 15–20 分钟</span>
+    <span class="pill">不改代码</span>
+    <span class="pill">产出：3 条自己的解释</span>
+  </div>
+
+  <div class="callout">
+    <strong>和你的目标有什么关系？</strong>
+    <p>面试官不只关心“页面写得怎么样”，还会追问：事实从哪里来、谁能修改、如何验证、为什么这样设计。你需要能沿着文件解释整个文档系统。</p>
+  </div>
+
+  <h2>一个文档系统的四个角色</h2>
+  <div class="map">
+    <article class="card">
+      <div class="number">01 · SOURCE</div>
+      <h3>事实来源</h3>
+      <p><code>api/openapi.yaml</code> 描述接口契约。参数、响应结构和类型应该首先在这里成立。</p>
+    </article>
+    <article class="card">
+      <div class="number">02 · EXPERIENCE</div>
+      <h3>读者体验</h3>
+      <p><code>website/</code> 决定内容如何组织、导航、构建并最终呈现给开发者。</p>
+    </article>
+    <article class="card">
+      <div class="number">03 · DECISION</div>
+      <h3>决策记录</h3>
+      <p><code>docs/adr/</code> 解释为什么采用某种方案、放弃了什么，以及何时应重新决策。</p>
+    </article>
+    <article class="card">
+      <div class="number">04 · CHECK</div>
+      <h3>可重复检查</h3>
+      <p><code>website/package.json</code> 暴露构建、类型检查和 OpenAPI 校验命令。</p>
+    </article>
+  </div>
+
+  <h2>观察，而不是背定义</h2>
+  <p>依次打开下面四个文件。每次只回答一个问题：<em>如果这里改错了，谁会受到影响？</em></p>
+
+  <table>
+    <thead><tr><th>文件</th><th>观察重点</th><th>可能影响</th></tr></thead>
+    <tbody>
+      <tr><td><code>api/openapi.yaml</code></td><td><code>Collection</code> schema</td><td>Reference 的技术准确性</td></tr>
+      <tr><td><code>website/docusaurus.config.ts</code></td><td>站点 URL、导航、断链策略</td><td>发布位置与读者体验</td></tr>
+      <tr><td><code>docs/adr/0001-documentation-framework-selection.md</code></td><td>Decision 与 Rejected alternatives</td><td>团队理解和未来换型</td></tr>
+      <tr><td><code>website/package.json</code></td><td><code>build</code> 与 <code>validate:openapi</code></td><td>本地与 CI 的可重复操作</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exercise">
+    <h2>你的练习</h2>
+    <p>不要复制上面的词。用你自己的语言，在聊天里完成下面三句话，每句 1–3 句即可：</p>
+    <div class="response">1. OpenAPI 文件在这个项目里的作用是……
+
+2. Docusaurus 站点和 OpenAPI 文件的区别是……
+
+3. ADR 值得保留，因为……</div>
+    <p>我会按“是否区分了事实、展示和决策”给你反馈。回答没有唯一措辞。</p>
+  </div>
+
+  <details>
+    <summary>卡住时再看：三个提示</summary>
+    <ul>
+      <li>Reference 页面可能会变化，但它背后的接口契约应该有明确来源。</li>
+      <li>站点框架负责发布体验，不等于它拥有全部技术事实。</li>
+      <li>ADR 不是会议纪要，它记录的是带取舍的决策。</li>
+    </ul>
+  </details>
+
+  <div class="source">
+    <strong>本节主来源</strong>
+    <p><a href="https://spec.openapis.org/oas/latest.html">OpenAPI Specification</a>：了解接口描述文档的正式结构。补充阅读：<a href="https://docusaurus.io/docs">Docusaurus documentation</a>。</p>
+  </div>
+
+  <div class="checkpoint">
+    <strong>完成标准</strong>
+    <p>你提交三条自己的解释，并能指出其中哪一项是事实来源、哪一项是发布界面、哪一项是决策证据。完成反馈后再进入 Lesson 1。</p>
+  </div>
+
+  <p>任何文件或概念不清楚，都直接问我。你的问题也是判断下一课难度的重要信号。</p>
+
+  <nav class="lesson-nav">
+    <a href="../COURSE.md">← 课程地图</a>
+    <a href="0001-select-a-documentation-framework.html">Lesson 1（完成反馈后）→</a>
+  </nav>
+</main>
+</body>
+</html>
