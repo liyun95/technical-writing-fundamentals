@@ -17,7 +17,7 @@ The repository and site already created before this contract are **instructor-pr
 | --- | --- | --- | --- | --- |
 | 0 | Orient the learning environment | Identify the repository’s source, site, and quality boundaries | Personal learning contract and baseline observations | 45 min |
 | 1 | Layered documentation-system selection | Separate portal, REST, SDK, and governance decisions; defend how the layers work together | Reviewed layered architecture decision and accepted ADR | 2–3 h |
-| 2 | Documentation architecture | Turn audiences and top tasks into a Diátaxis map and navigation hypothesis | Information architecture brief | 3 h |
+| 2 | Documentation architecture | Turn audiences and top tasks into a Diátaxis map and navigation hypothesis | Reviewed Function Chain content-set IA brief | 3 h |
 | 3 | Reference source strategy | Trace REST and multi-SDK facts from source through extraction to the reader-facing output | REST and multi-SDK source-to-reference map | 2–3 h |
 | 4 | OpenAPI as an engineering artifact | Change a minimal API contract, predict validation failure, then repair it | Reviewed OpenAPI change and validation note | 4 h |
 | 5 | Python SDK reference pipeline | First generate Reference from docstrings in a course-built minimal Python SDK example; then fork PyMilvus and run a controlled 1–2-method docstring experiment | Reproducible minimal SDK pipeline, reviewed PyMilvus patch, and source-to-output note | 6 h |
@@ -38,4 +38,4 @@ The sprint is complete only when you can explain each major decision aloud, repr
 
 ## Starting point
 
-**Current lesson: Lesson 2 — Documentation architecture.** Turn concrete Milvus-like reader situations into top tasks, classify the content by user need, and test a navigation hypothesis without treating Diátaxis categories as the site navigation itself.
+**Current lesson: Lesson 3 — Reference source strategy.** Trace one technical fact from its authoritative REST or SDK source through extraction and generation to the reader-facing output, then identify where drift can enter the path.
