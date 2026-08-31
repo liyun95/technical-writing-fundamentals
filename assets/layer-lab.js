@@ -51,9 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (answered < items.length) {
         summary.textContent = `已回答 ${answered}/${items.length} 项；请先完成剩余项目。`;
       } else if (correct === items.length) {
-        summary.textContent = '7/7：分层定位准确。接下来请完成开放式架构决策。';
+        summary.textContent = `${correct}/${items.length}：判断准确。接下来请完成开放式练习。`;
       } else {
-        summary.textContent = `${correct}/7：阅读每项解释后修改答案，再检查一次。`;
+        summary.textContent = `${correct}/${items.length}：阅读每项解释后修改答案，再检查一次。`;
       }
     });
   });

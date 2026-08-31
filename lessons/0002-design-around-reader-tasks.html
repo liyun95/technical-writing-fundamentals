@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 2 — 围绕读者任务设计文档架构</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../assets/course.css">
+  <script src="../assets/layer-lab.js" defer></script>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Lesson 2 · Documentation Architecture</div>
+  <h1>先识别读者此刻要做什么</h1>
+  <p class="lede">同一个“consistency level”主题，可能需要教程、How-to、Reference 和 Explanation 四种内容。信息架构的起点不是给页面贴标签，而是识别读者所处的情境、目标和此刻需要的帮助。</p>
+
+  <div class="meta">
+    <span class="pill">建议用时 35–45 分钟</span>
+    <span class="pill">前置：已完成 Lesson 1</span>
+    <span class="pill">产出：最小信息架构假设</span>
+  </div>
+
+  <div class="checkpoint">
+    <strong>这节课的一个胜利</strong>
+    <p>完成后，你能把“Python 开发者”这种宽泛受众，改写成可设计内容的读者任务，并能解释为什么 Diátaxis 类型不应被机械地复制成四个空目录。</p>
+  </div>
+
+  <h2>角色还不是需求</h2>
+  <p>“Python 开发者”只说明了读者的一部分背景。同一个人会在不同时间提出完全不同的问题：</p>
+
+  <table>
+    <thead><tr><th>读者此刻的情境</th><th>真正的问题</th><th>需要的帮助</th></tr></thead>
+    <tbody>
+      <tr><td>第一次接触向量数据库</td><td>“你能带我成功跑通一次检索吗？”</td><td>受控、可成功的学习路径</td></tr>
+      <tr><td>正在给已有应用增加一致性设置</td><td>“我应该怎样完成这项修改？”</td><td>面向目标的操作步骤</td></tr>
+      <tr><td>代码写到一半，忘了默认值</td><td>“这个参数的准确取值是什么？”</td><td>可快速查询的技术事实</td></tr>
+      <tr><td>正在评估延迟与一致性的取舍</td><td>“为什么会有这些级别，影响是什么？”</td><td>背景、联系和设计原理</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>把受众改写成任务</strong>
+    <p>使用这个最小句式：<strong>当……时，我想……，以便……</strong>。情境限制内容入口，目标决定页面的工作，结果帮助你判断这项内容是否真的解决了问题。</p>
+  </div>
+
+  <h2>用两个问题定位内容形态</h2>
+  <p>Diátaxis 不是四个孤立标签，而是一张由两个维度组成的地图：</p>
+
+  <table>
+    <thead><tr><th></th><th>获得能力：读者正在学习</th><th>应用能力：读者正在工作</th></tr></thead>
+    <tbody>
+      <tr><th>需要行动</th><td><strong>Tutorial</strong><br>带领读者完成一次可理解、可成功的学习经历</td><td><strong>How-to</strong><br>帮助已有基础的读者完成一个真实目标</td></tr>
+      <tr><th>需要认知</th><td><strong>Explanation</strong><br>帮助读者理解背景、原因、联系和取舍</td><td><strong>Reference</strong><br>准确、完整地描述读者工作时要查询的事实</td></tr>
+    </tbody>
+  </table>
+
+  <p>遇到模糊页面时，不要先看标题里有没有 “guide”。问两个问题：</p>
+  <ol>
+    <li>读者现在需要<strong>采取行动</strong>，还是<strong>获得认知</strong>？</li>
+    <li>读者正在<strong>获得能力</strong>，还是<strong>应用已有能力</strong>？</li>
+  </ol>
+
+  <h2>同一个主题为什么需要四个页面</h2>
+  <p>以 consistency level 为例。一个名为 “Consistency guide” 的大页面很容易同时承担四种工作，结果是谁都难以快速使用。拆分以后，每一页有一个清晰承诺：</p>
+
+  <div class="map">
+    <article class="card">
+      <div class="number">TUTORIAL · 引导学习</div>
+      <h3>完成第一次可检索写入</h3>
+      <p>课程控制数据、步骤和结果；只使用一个预先选好的级别，确保初学者成功。</p>
+    </article>
+    <article class="card">
+      <div class="number">HOW-TO · 解决任务</div>
+      <h3>为查询配置一致性级别</h3>
+      <p>假设读者已有 collection 和客户端，直接帮助其完成配置目标。</p>
+    </article>
+    <article class="card">
+      <div class="number">REFERENCE · 查询事实</div>
+      <h3>consistencyLevel 参数</h3>
+      <p>列出类型、允许值、默认值、错误、版本，以及 REST 与 SDK 的语言表达。</p>
+    </article>
+    <article class="card">
+      <div class="number">EXPLANATION · 理解原理</div>
+      <h3>一致性、延迟与可见性</h3>
+      <p>解释为什么存在不同级别、它们之间的联系，以及选择时承担的取舍。</p>
+    </article>
+  </div>
+
+  <div class="callout">
+    <strong>这里不是要求四页必须等长</strong>
+    <p>有些主题暂时只需要 Reference 和一个 How-to。Diátaxis 官方也明确提醒：不要先创建四个空结构，再强迫内容填进去。它首先是判断用户需要和修正内容的工具。</p>
+  </div>
+
+  <div class="exercise">
+    <h2>练习 A：按读者需要分类</h2>
+    <p>判断下面六个页面此刻主要帮助读者做什么。四个答案都使用四个汉字，避免视觉长度提示。</p>
+
+    <form data-layer-quiz>
+      <div class="classification-grid">
+        <div class="classification-item">
+          <label>用 Python 完成第一次向量检索
+            <select data-answer="tutorial" data-explanation="它为初学者控制路径和结果，目标是获得能力。">
+              <option value="">请选择</option><option value="tutorial">引导学习</option><option value="howto">解决任务</option><option value="reference">查询事实</option><option value="explanation">理解原理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>为已有 collection 更改一致性级别
+            <select data-answer="howto" data-explanation="读者已有基础，页面帮助其完成一个真实目标。">
+              <option value="">请选择</option><option value="tutorial">引导学习</option><option value="howto">解决任务</option><option value="reference">查询事实</option><option value="explanation">理解原理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>REST Create Collection 请求字段
+            <select data-answer="reference" data-explanation="它描述接口结构和准确事实，供工作时查询。">
+              <option value="">请选择</option><option value="tutorial">引导学习</option><option value="howto">解决任务</option><option value="reference">查询事实</option><option value="explanation">理解原理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>为什么索引会影响检索性能
+            <select data-answer="explanation" data-explanation="问题要求建立原因、机制和结果之间的理解。">
+              <option value="">请选择</option><option value="tutorial">引导学习</option><option value="howto">解决任务</option><option value="reference">查询事实</option><option value="explanation">理解原理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>排查客户端连接超时
+            <select data-answer="howto" data-explanation="排障也是在具体情境中解决真实问题，属于目标导向的指导。">
+              <option value="">请选择</option><option value="tutorial">引导学习</option><option value="howto">解决任务</option><option value="reference">查询事实</option><option value="explanation">理解原理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+
+        <div class="classification-item">
+          <label>Python SearchResult 类型与属性
+            <select data-answer="reference" data-explanation="类型、属性和签名是需要准确检索的产品事实。">
+              <option value="">请选择</option><option value="tutorial">引导学习</option><option value="howto">解决任务</option><option value="reference">查询事实</option><option value="explanation">理解原理</option>
+            </select>
+          </label>
+          <span class="item-feedback" data-item-feedback></span>
+        </div>
+      </div>
+
+      <div class="quiz-actions">
+        <button class="primary-action" type="submit">检查判断</button>
+        <span class="feedback-panel" data-quiz-feedback aria-live="polite"></span>
+      </div>
+      <noscript><p>如果浏览器没有运行 JavaScript，把六项答案发给我，我会逐项反馈。</p></noscript>
+    </form>
+  </div>
+
+  <h2>Diátaxis 不是导航菜单生成器</h2>
+  <p>直接建立 “Tutorials / How-to / Reference / Explanation” 四个顶级目录，看起来很整齐，却可能要求读者先理解我们的内容模型，才能找到自己的任务。更稳妥的顺序是：</p>
+
+  <ol>
+    <li>列出重要的读者情境和 top tasks；</li>
+    <li>判断每项任务需要哪一种内容形态；</li>
+    <li>用读者能识别的语言形成入口和分组；</li>
+    <li>检查相邻内容能否在读者需要改变时互相连接；</li>
+    <li>再用搜索、支持问题或任务测试验证这套假设。</li>
+  </ol>
+
+  <p>因此，一个初始门户可以使用 “Get started / Build applications / API &amp; SDK Reference / Concepts” 作为入口假设，但它不是因为四个名称分别对应 Diátaxis 四象限才正确。它必须能够解释：哪些重要任务从哪个入口开始，以及读者如何转向相邻内容。</p>
+
+  <div class="exercise">
+    <h2>练习 B：提交你的最小信息架构假设</h2>
+    <p>下面不是让你写完整 IA 文档。请根据你维护 Milvus 文档的经验，在聊天里补完四行。我会重点检查“任务是否具体”以及“入口是否使用读者语言”。</p>
+    <div class="response">1. 一个重要读者情境：当……时，读者想……，以便……
+2. 这项需要主要属于：Tutorial / How-to / Reference / Explanation，因为……
+3. 我会让读者从“……”这个入口开始，而不是从“……”开始，因为……
+4. 完成或读完后，最需要链接到的相邻内容是……，因为……</div>
+  </div>
+
+  <details>
+    <summary>提交前检查</summary>
+    <ul>
+      <li>情境中包含触发条件，而不只是“某类开发者”。</li>
+      <li>目标描述读者要完成或理解什么，而不是“阅读文档”。</li>
+      <li>内容类型由读者当下的行动/认知与学习/工作状态决定。</li>
+      <li>入口名称是读者可识别的任务或对象，不是内部团队名称。</li>
+      <li>相邻链接服务于读者需求的变化，而不是为了增加链接数量。</li>
+    </ul>
+  </details>
+
+  <div class="source">
+    <strong>本节主来源</strong>
+    <p>先阅读官方的 <a href="https://www.diataxis.fr/start-here/">Diátaxis in five minutes</a> 和 <a href="https://www.diataxis.fr/compass/">Diátaxis compass</a>。特别注意官方的 <a href="https://www.diataxis.fr/how-to-use-diataxis/">应用建议</a>：不要把四个分类机械地变成空目录。随时可查看<a href="../reference/content-architecture-compass.html">内容架构速查</a>。</p>
+  </div>
+
+  <div class="checkpoint">
+    <strong>完成标准</strong>
+    <p>练习 A 用于即时校准；真正通过需要你提交练习 B，并能说明为什么同一个主题可能需要不同页面，以及为什么内容类型不能自动替你决定导航。</p>
+  </div>
+
+  <p>如果你对 Tutorial 和 How-to、Reference 和 Explanation 的边界不确定，直接把具体页面或场景告诉我。边界问题本身就是这节课最有价值的材料。</p>
+
+  <nav class="lesson-nav">
+    <a href="0001-select-a-documentation-framework.html">← Lesson 1</a>
+    <a href="../reference/content-architecture-compass.html">内容架构速查 →</a>
+  </nav>
+</main>
+</body>
+</html>

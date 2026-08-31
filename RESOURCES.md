@@ -4,6 +4,10 @@
 
 - [Diátaxis framework](https://diataxis.fr/)
   Use for: distinguishing tutorials, how-to guides, explanation, and reference while designing an information architecture.
+- [Diátaxis compass](https://www.diataxis.fr/compass/)
+  Use for: classifying ambiguous content by whether it informs action or cognition and supports acquiring or applying skill.
+- [Diátaxis as a guide to work](https://www.diataxis.fr/how-to-use-diataxis/)
+  Use for: applying the framework incrementally without mechanically creating four empty site sections.
 - [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
   Use for: understanding the machine-readable contract that can drive REST API reference and validation.
 - [Docusaurus documentation](https://docusaurus.io/docs)
